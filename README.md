@@ -1,2 +1,2 @@
 # fiszkiserwer
-#fuck u
+#fuck u too
