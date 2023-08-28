@@ -104,7 +104,7 @@ CREATE TABLE `language` (
 INSERT INTO `language` (`languageID`, `languagename`, `languagepicture`) VALUES
 (0, 'Polish', 'pl_flag.jpg'),
 (1, 'Italian', 'it_flag.jpg'),
-(2, 'English', 'en_flag.jpg'),
+(2, 'French', 'fr_flag.jpg'),
 (3, 'German', 'ge_flag.jpg');
 
 -- --------------------------------------------------------

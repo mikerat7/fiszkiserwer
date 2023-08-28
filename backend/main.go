@@ -62,7 +62,7 @@ func main() {
 	}
 	defer db.Close()
 
-	loadSQLFile("sql/FlasCards.sql")
+	loadSQLFile("sql/fiszki.sql")
 
 	e := echo.New()
 	e.Use(middleware.Recover(), middleware.Logger(), middleware.CORS(), middleware.RateLimiter(middleware.NewRateLimiterMemoryStore((20))))
