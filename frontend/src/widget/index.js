@@ -1,5 +1,5 @@
-import menubar from './menubar'
+import Menubar from './menubar'
 
 export {
-    menubar   
+    Menubar   
 }

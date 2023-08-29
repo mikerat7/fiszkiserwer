@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.scss";
 
-function menubar() {
+function Menubar() {
 
     return (
      <div class="menubar">
@@ -12,4 +12,4 @@ function menubar() {
     );
   }
   
-  export default menubar;
+  export default Menubar;
