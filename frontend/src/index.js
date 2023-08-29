@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import {
   Home,
-  Root
+  Root,
+  Login,
+  Signup,
+  Notfound
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -13,6 +16,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Root />}>
           <Route path="" element={<Home/>}></Route>
+          <Route path="Login" element={<Login/>}></Route>
+          <Route path="Signup" element={<Signup/>}></Route>
+          <Route path="*" element={<Notfound/>}></Route>
+          
         </Route>
       </Routes>
     </BrowserRouter>
