@@ -7,7 +7,7 @@ function Menubar() {
      <div class="menubar">
         <a>Login</a>
         <a>Language</a>
-        <a>Set</a>
+        <a id="bottom">Set</a>
      </div>
     );
   }

@@ -6,3 +6,19 @@
     background-color: red;
     color: white;
 }
+
+.menubar > a{
+    border: 2px solid black;
+    border-bottom-width: 0px;
+    font-weight: bold;
+    font-size: 35px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 30px;
+    text-align: left;
+}
+
+.menubar > a:last-child{
+    border-bottom-width: 2px;
+}
