@@ -19,6 +19,14 @@
     text-align: left;
 }
 
+.menubar > a:visited {
+    color: white;
+  }
+.menubar > a:hover {
+    color: black;
+  }
+  
+
 .menubar > a:last-child{
     border-bottom-width: 2px;
 }
