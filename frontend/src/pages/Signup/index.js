@@ -13,9 +13,15 @@ function Signup() {
       const passwd1 = form["password"].value
       const passwd2 = form["passwordconfirm"].value
       const email = form["mail"].value
+      const re = /(?:[A-Z].*[0-9])|(?:[0-9].*[A-Z])/
 
-      
-      if(await LoginMan.signup(username, passwd1, email)){
+      if(passwd1 != passwd2){
+        errmsg.innerText = "The passwords don't match up!"
+      }else if(passwd1.length < 8){
+        errmsg.innerText = "Your password has to be at least 8 characters long!"
+      }else if(!re.test(passwd1)){
+        errmsg.innerText = "Your password has to contain a capitalized character and a number!"
+      } else if(await LoginMan.signup(username, passwd1, email)){
         window.location = "/login"
       }else{
         errmsg.innerText = "User with given name already exists!"
