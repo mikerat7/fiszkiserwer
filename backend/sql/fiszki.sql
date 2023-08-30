@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2023 at 08:20 PM
+-- Generation Time: Aug 30, 2023 at 04:21 PM
 -- Wersja serwera: 10.4.28-MariaDB
 -- Wersja PHP: 8.2.4
 
@@ -104,7 +104,7 @@ CREATE TABLE `language` (
 INSERT INTO `language` (`languageID`, `languagename`, `languagepicture`) VALUES
 (0, 'Polish', 'pl_flag.jpg'),
 (1, 'Italian', 'it_flag.jpg'),
-(2, 'French', 'fr_flag.jpg'),
+(2, 'English', 'en_flag.jpg'),
 (3, 'German', 'ge_flag.jpg');
 
 -- --------------------------------------------------------
@@ -119,6 +119,18 @@ CREATE TABLE `user` (
   `password` char(255) NOT NULL,
   `profilepic` varchar(255) NOT NULL,
   `email` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `usertoken`
+--
+
+CREATE TABLE `usertoken` (
+  `usertokenID` int(11) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `token` char(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -168,6 +180,13 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `username` (`username`);
 
 --
+-- Indeksy dla tabeli `usertoken`
+--
+ALTER TABLE `usertoken`
+  ADD PRIMARY KEY (`usertokenID`),
+  ADD KEY `FK6` (`userID`);
+
+--
 -- Constraints for dumped tables
 --
 
@@ -190,6 +209,12 @@ ALTER TABLE `fctype`
 ALTER TABLE `flashcards`
   ADD CONSTRAINT `FK` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
   ADD CONSTRAINT `FK2` FOREIGN KEY (`languageID`) REFERENCES `language` (`languageID`);
+
+--
+-- Constraints for table `usertoken`
+--
+ALTER TABLE `usertoken`
+  ADD CONSTRAINT `FK6` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
