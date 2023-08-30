@@ -5,6 +5,7 @@ function Menubar() {
 
     return (
      <div class="menubar">
+        <a href="/">Home</a>
         <a href="Login">Log in</a>
         <a href="Signup">Sign up</a>
         <a>Language</a>
