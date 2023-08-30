@@ -67,6 +67,8 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Recover(), middleware.Logger(), middleware.CORS(), middleware.RateLimiter(middleware.NewRateLimiterMemoryStore((20))))
 
+	e.POST("signup/", signup)
+
 	err = e.Start(":2137")
 	if err != nil {
 		log.Fatal(err)
