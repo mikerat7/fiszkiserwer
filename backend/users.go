@@ -23,11 +23,19 @@ func signup(c echo.Context) error {
 	}
 	pswh := hashPassword(rq.Password)
 
+	msg := 0
+
+	err = db.QueryRow("SELECT userID FROM `user` WHERE username = ?;", rq.Username).Scan(&msg)
+
+	if err == nil {
+		fmt.Println(err.Error())
+		return c.NoContent(http.StatusConflict)
+	}
 	_, err = db.Exec("INSERT INTO user (username, password, profilepic, email) VALUES (?, ?, ?, ?);", rq.Username, pswh, "", rq.Email)
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return c.NoContent(http.StatusBadRequest)
+		return err
 	}
 
 	fmt.Println(pswh)
