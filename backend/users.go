@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"math/rand"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -40,4 +41,39 @@ func signup(c echo.Context) error {
 
 	fmt.Println(pswh)
 	return c.NoContent(http.StatusOK)
+}
+
+func login(c echo.Context) error {
+
+	rq := LoginUser{}
+	err := c.Bind(&rq)
+	if err != nil {
+		fmt.Println(err.Error())
+		return c.NoContent(http.StatusBadRequest)
+	}
+	pswh := hashPassword(rq.Password)
+
+	id := 0
+	err = db.QueryRow("SELECT userID FROM `user` WHERE username = ? AND password = ?;", rq.Username, pswh).Scan(&id)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return c.NoContent(http.StatusConflict)
+	}
+	token := ""
+	err = db.QueryRow("SELECT token FROM `usertoken` WHERE userID = ?;", id).Scan(&token)
+	if err == nil {
+		res := LoginResponse{}
+		res.userID = id
+		res.token = token
+		return c.JSON(http.StatusAccepted, res)
+	}
+	for i := 0; i < 32; i++ {
+		token += string(rune(rand.Intn(255)))
+	}
+	res := LoginResponse{}
+	res.userID = id
+	res.token = token
+	_, err = db.Exec("INSERT INTO usertoken (userID, token) VALUES (?, ?);", id, token)
+	return c.JSON(http.StatusAccepted, res)
 }

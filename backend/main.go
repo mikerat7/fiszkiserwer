@@ -69,8 +69,11 @@ func main() {
 
 	e.POST("signup/", signup)
 
+	e.POST("login/", login)
+
 	err = e.Start(":2137")
 	if err != nil {
 		log.Fatal(err)
 	}
+
 }

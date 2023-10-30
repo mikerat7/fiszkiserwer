@@ -5,3 +5,13 @@ type SignupUser struct {
 	Email    string
 	Password string
 }
+
+type LoginUser struct {
+	Username string
+	Password string
+}
+
+type LoginResponse struct {
+	userID int
+	token  string
+}

@@ -30,3 +30,16 @@ export async function signup_fetch(user, passwd, mail){
 
     return response.status == 200
 }
+
+export async function login_fetch(user, passwd){
+  let res = {
+      Username: user,
+      Password: passwd
+  }
+
+  console.log(res)
+
+  const response = await POST("login/", res)
+
+  return response.status == 202
+}
