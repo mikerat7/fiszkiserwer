@@ -71,6 +71,8 @@ func main() {
 
 	e.POST("login/", login)
 
+	e.POST("logout/", logout)
+
 	err = e.Start(":2137")
 	if err != nil {
 		log.Fatal(err)

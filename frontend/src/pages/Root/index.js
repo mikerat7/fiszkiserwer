@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
 import "./style.scss";
-import Menubar from "../../widget/menubar"
+import {Menubar, Menubar2} from "../../widget/menubar"
+import LoginMan from "../../login_manager";
 
 export default function Root() {
 
   return (
     <div id="main">
-      <Menubar />
+      {
+        LoginMan.loggedin() ? (<Menubar2 />) : (<Menubar />)
+      }
       <Outlet></Outlet>
     </div>
   );

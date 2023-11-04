@@ -41,5 +41,20 @@ export async function login_fetch(user, passwd){
 
   const response = await POST("login/", res)
 
-  return response.status == 202
+  if(response.status == 202){
+    return await response.json()
+  }
+  else{
+    return false
+  }
+}
+
+export async function logout_fetch(token){
+  let res = {
+      Token: token
+  }
+console.log(token)
+  const response = await POST("logout/", res)
+
+  return response.status == 200
 }

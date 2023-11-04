@@ -15,3 +15,7 @@ type LoginResponse struct {
 	userID int
 	token  string
 }
+
+type Authorise struct {
+	token string
+}
