@@ -9,11 +9,10 @@ export function Menubar() {
 
     return (
      <div class="menubar">
-        <a href="/">Home</a>
-        <a href="Login">Log in</a>
-        <a href="Signup">Sign up</a>
-        <a>Language</a>
-        <a>Set</a>
+         <a href="/">Home</a>
+         <a href="Login">Log in</a>
+         <a href="Signup">Sign up</a>
+         <a>Explore</a>
      </div>
     );
   }
@@ -35,8 +34,8 @@ export function Menubar() {
             <span>{LoginMan.username()}</span>
             {LoginMan.pfp() != "" ? (<img src={LoginMan.pfp()} id="pfp"/>) : <Icon />}
          </a>
-       <a>Language</a>
-       <a>Set</a>
+       <a>Explore</a>
+       <a href="Create">Create</a>
     </div>
    );
  }  

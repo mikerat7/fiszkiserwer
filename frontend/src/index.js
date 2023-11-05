@@ -7,7 +7,8 @@ import {
   Login,
   Signup,
   Notfound,
-  Profile
+  Profile,
+  Create
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="Login" element={<Login/>}></Route>
           <Route path="Signup" element={<Signup/>}></Route>
           <Route path="Profile" element={<Profile/>}></Route>
+          <Route path="Create" element={<Create/>}></Route>
           <Route path="*" element={<Notfound/>}></Route>
           
         </Route>
