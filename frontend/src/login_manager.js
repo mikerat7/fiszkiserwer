@@ -1,4 +1,4 @@
-import { login_fetch, signup_fetch, logout_fetch, userdata_fetch } from "./network_manager"
+import { login_fetch, signup_fetch, logout_fetch, userdata_fetch, changepfp_fetch } from "./network_manager"
 
 class LoginManager{
     async signup(username, password, email){
@@ -12,21 +12,25 @@ class LoginManager{
 
             localStorage.setItem("userID", res.UserID) 
             localStorage.setItem("token", res.Token) 
-
-            let userinfo = await userdata_fetch(res.UserID)
-            res = await userinfo.json()
-
-            localStorage.setItem("username", res.Username) 
-            if(res.Profilepic != ""){
-                localStorage.setItem("pfp", "http://localhost:2137/" + res.Profilepic) 
-            }else{
-                localStorage.setItem("pfp", "") 
-            }
+            
+            await this.UpdateUserInfo()
 
             return true
         } else{
             return false
         }
+    }
+
+    async UpdateUserInfo(){
+        let userinfo = await userdata_fetch(this.userID())
+        let res = await userinfo.json()
+
+        localStorage.setItem("username", res.Username) 
+        localStorage.setItem("pfp", res.Profilepic) 
+    }
+
+    async changepfp(file){
+        return await changepfp_fetch(this.token(), file)
     }
 
     async logout(){

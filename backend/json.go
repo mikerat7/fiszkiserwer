@@ -24,3 +24,8 @@ type UserInfo struct {
 	Username   string
 	Profilepic string
 }
+
+type ChangePfp struct {
+	Token string
+	Data  string
+}

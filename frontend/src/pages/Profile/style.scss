@@ -1,0 +1,58 @@
+@import 'src/styles/colors';
+#link:hover{
+    color: #ff0000;
+}
+
+#pfp_form {
+    width: 580px;
+    background: #ccc;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid black;
+  }
+  
+  #pfp_form ol {
+    padding-left: 0;
+  }
+  
+  #pfp_form li,
+  #pfp_form div > p {
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+  }
+  
+  #pfp_form img {
+    height: 64px;
+    order: 1;
+  }
+  
+  #pfp_form p {
+    line-height: 32px;
+    padding-left: 10px;
+  }
+  
+  #pfp_form label,
+  #pfp_submit {
+    background-color: #7f9ccb;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px ridge black;
+    font-size: 0.8rem;
+    height: auto;
+  }
+  
+  #pfp_form label:hover,
+  #pfp_submit:hover {
+    background-color: #2d5ba3;
+    color: white;
+  }
+  
+  #pfp_form label:active,
+  #pfp_submit:active {
+    background-color: #0d3f8f;
+    color: white;
+  }

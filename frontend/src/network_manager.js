@@ -60,6 +60,24 @@ export async function logout_fetch(token){
   return response.status == 200
 }
 
+export async function changepfp_fetch(token, file){
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
+
+  let res = {
+      Token: token,
+      Data: await toBase64(file)
+  }
+
+  const response = await POST("changepfp/", res)
+
+  return response.status == 200
+}
+
 export function userdata_fetch(UserID){
   return GET("users/" + UserID)
 }

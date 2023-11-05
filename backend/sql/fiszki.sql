@@ -8,7 +8,7 @@ CREATE TABLE `user` (
   `userID` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
   `password` char(255) NOT NULL,
-  `profilepic` varchar(255) NOT NULL,
+  `profilepic` blob NOT NULL,
   `email` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

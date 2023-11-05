@@ -31,7 +31,7 @@ export function Menubar() {
     <div class="menubar">
        <a href="/">Home</a>
        <a onClick={async () => await logout()}>Log Out</a>
-       <a href="" id="UserBtn">
+       <a href="Profile" id="UserBtn">
             <span>{LoginMan.username()}</span>
             {LoginMan.pfp() != "" ? (<img src={LoginMan.pfp()} id="pfp"/>) : <Icon />}
          </a>

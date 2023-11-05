@@ -44,6 +44,15 @@ func signup(c echo.Context) error {
 	return c.NoContent(http.StatusOK)
 }
 
+func genrandom(n int) string {
+	str := ""
+	for i := 0; i < n; i++ {
+		str += string(rune(rand.Intn(9) + 48))
+	}
+
+	return str
+}
+
 func login(c echo.Context) error {
 
 	rq := LoginUser{}
@@ -69,9 +78,9 @@ func login(c echo.Context) error {
 		res.Token = token
 		return c.JSON(http.StatusAccepted, res)
 	}
-	for i := 0; i < 32; i++ {
-		token += string(rune(rand.Intn(9) + 48))
-	}
+
+	token = genrandom(32)
+
 	res := LoginResponse{}
 	res.UserID = id
 	res.Token = token
@@ -93,13 +102,17 @@ func authorise(token string) int {
 
 func logout(c echo.Context) error {
 	rq := Authorise{}
-	c.Bind(&rq)
+	err := c.Bind(&rq)
+
+	if err != nil {
+		return c.NoContent(http.StatusBadRequest)
+	}
 	id := authorise(rq.Token)
 	if id == -1 {
 		return c.NoContent(http.StatusForbidden)
 	}
 
-	_, err := db.Exec("DELETE FROM `usertoken` WHERE userID = ?", id)
+	_, err = db.Exec("DELETE FROM `usertoken` WHERE userID = ?", id)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -124,4 +137,31 @@ func GetUserInfo(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, info)
+}
+
+func changepfp(c echo.Context) error {
+	rq := ChangePfp{}
+	err := c.Bind(&rq)
+
+	if err != nil {
+		return c.NoContent(http.StatusBadRequest)
+	}
+	id := authorise(rq.Token)
+	if id == -1 {
+		return c.NoContent(http.StatusForbidden)
+	}
+
+	if err != nil {
+		fmt.Println(err)
+		return c.NoContent(http.StatusInternalServerError)
+	}
+
+	_, err = db.Exec("UPDATE user SET profilepic = ? WHERE userID = ?", rq.Data, id)
+
+	if err != nil {
+		fmt.Println(err)
+		return c.NoContent(http.StatusInternalServerError)
+	}
+
+	return c.NoContent(http.StatusOK)
 }
