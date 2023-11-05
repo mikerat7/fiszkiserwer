@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -105,4 +106,22 @@ func logout(c echo.Context) error {
 	}
 
 	return c.NoContent(http.StatusOK)
+}
+
+func GetUserInfo(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return c.NoContent(http.StatusBadRequest)
+	}
+
+	info := UserInfo{}
+
+	err = db.QueryRow("SELECT username, profilepic FROM user WHERE userID = ?", id).Scan(&info.Username, &info.Profilepic)
+
+	if err != nil {
+		return c.NoContent(http.StatusNotFound)
+	}
+
+	return c.JSON(http.StatusOK, info)
 }

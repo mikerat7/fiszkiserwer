@@ -19,3 +19,8 @@ type LoginResponse struct {
 type Authorise struct {
 	Token string
 }
+
+type UserInfo struct {
+	Username   string
+	Profilepic string
+}

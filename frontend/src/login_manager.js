@@ -1,4 +1,4 @@
-import { login_fetch, signup_fetch, logout_fetch } from "./network_manager"
+import { login_fetch, signup_fetch, logout_fetch, userdata_fetch } from "./network_manager"
 
 class LoginManager{
     async signup(username, password, email){
@@ -12,6 +12,17 @@ class LoginManager{
 
             localStorage.setItem("userID", res.UserID) 
             localStorage.setItem("token", res.Token) 
+
+            let userinfo = await userdata_fetch(res.UserID)
+            res = await userinfo.json()
+
+            localStorage.setItem("username", res.Username) 
+            if(res.Profilepic != ""){
+                localStorage.setItem("pfp", "http://localhost:2137/" + res.Profilepic) 
+            }else{
+                localStorage.setItem("pfp", "") 
+            }
+
             return true
         } else{
             return false
@@ -33,6 +44,8 @@ class LoginManager{
         localStorage.setItem("token", undefined) 
         localStorage.setItem("userID", -1)
         localStorage.setItem("loggedin", false)
+        localStorage.setItem("username", undefined) 
+        localStorage.setItem("pfp", undefined) 
     }
 
     userID(){
@@ -45,6 +58,14 @@ class LoginManager{
 
     loggedin(){
         return localStorage.getItem("loggedin") == "true"
+    }
+
+    username(){
+        return localStorage.getItem("username")
+    }
+
+    pfp(){
+        return localStorage.getItem("pfp")
     }
 }
 

@@ -73,6 +73,8 @@ func main() {
 
 	e.POST("logout/", logout)
 
+	e.GET("users/:id", GetUserInfo)
+
 	err = e.Start(":2137")
 	if err != nil {
 		log.Fatal(err)
