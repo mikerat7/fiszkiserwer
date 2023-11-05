@@ -6,22 +6,23 @@ class LoginManager{
     }
     async login(username, password) {
         let userdata = await login_fetch(username, password) 
-        if(userdata){
-            localStorage.setItem("loggedin", "true")
+        if(userdata.status == 202){
+            let res = await userdata.json()
+            localStorage.setItem("loggedin", true)
 
-            localStorage.setItem("userID", String(userdata.userID)) 
-            localStorage.setItem("token", userdata.token) 
-            window.alert(JSON.stringify(userdata))
+            localStorage.setItem("userID", res.UserID) 
+            localStorage.setItem("token", res.Token) 
             return true
         } else{
             return false
         }
     }
+
     async logout(){
         if(await logout_fetch(this.token())){
-            localStorage.setItem("token", "false") 
-            localStorage.setItem("userID", "-1")
-            localStorage.setItem("loggedin", "")
+            this.force_logout()
+
+            return true
         }
         else{
             return false
@@ -29,23 +30,22 @@ class LoginManager{
     }
 
     async force_logout(){
-        localStorage.setItem("token", "false") 
-        localStorage.setItem("userID", "-1")
-        localStorage.setItem("loggedin", "")
+        localStorage.setItem("token", undefined) 
+        localStorage.setItem("userID", -1)
+        localStorage.setItem("loggedin", false)
     }
-userID(){
-    let str = localStorage.getItem("userID")
-    return parseInt(str)
-}
-token(){
-    let str = localStorage.getItem("token")
-    return str
-}
-loggedin(){
-    let str = localStorage.getItem("loggedin")
-    return str == "true"
-}
 
+    userID(){
+        return parseInt(localStorage.getItem("userID"))
+    }
+
+    token(){
+        return localStorage.getItem("token")
+    }
+
+    loggedin(){
+        return localStorage.getItem("loggedin") == "true"
+    }
 }
 
 

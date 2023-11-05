@@ -12,10 +12,10 @@ type LoginUser struct {
 }
 
 type LoginResponse struct {
-	userID int
-	token  string
+	UserID int
+	Token  string
 }
 
 type Authorise struct {
-	token string
+	Token string
 }

@@ -29,7 +29,7 @@ export function Menubar() {
    return (
     <div class="menubar">
        <a href="/">Home</a>
-       <a onClick={async () => await logout()} href="">Log Out</a>
+       <a onClick={async () => await logout()}>Log Out</a>
        <a href="">Sign up</a>
        <a>Language</a>
        <a>Set</a>
