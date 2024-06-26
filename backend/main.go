@@ -40,10 +40,7 @@ func loadSQLFile(path string) error {
 		if q == "" {
 			continue
 		}
-		if _, err := tx.Exec(q); err != nil {
-			// fmt.Println(q)
-			// log.Fatal(err)
-		}
+
 	}
 
 	fmt.Println("Successfully imported:", path)
@@ -76,6 +73,8 @@ func main() {
 	e.POST("changepfp/", changepfp)
 
 	e.GET("users/:id", GetUserInfo)
+
+	e.GET("language/", GetLanguage)
 
 	err = e.Start(":2137")
 	if err != nil {

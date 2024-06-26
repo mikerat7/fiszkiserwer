@@ -81,3 +81,7 @@ export async function changepfp_fetch(token, file){
 export function userdata_fetch(UserID){
   return GET("users/" + UserID)
 }
+
+export function language_fetch(){
+  return GET("language/")
+}

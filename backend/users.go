@@ -84,7 +84,7 @@ func login(c echo.Context) error {
 	res := LoginResponse{}
 	res.UserID = id
 	res.Token = token
-	_, err = db.Exec("INSERT INTO usertoken (userID, token) VALUES (?, ?);", id, token)
+	db.Exec("INSERT INTO usertoken (userID, token) VALUES (?, ?);", id, token)
 	return c.JSON(http.StatusAccepted, res)
 }
 

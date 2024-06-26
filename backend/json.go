@@ -29,3 +29,8 @@ type ChangePfp struct {
 	Token string
 	Data  string
 }
+
+type BaseInfo struct {
+	Id   int
+	Name string
+}

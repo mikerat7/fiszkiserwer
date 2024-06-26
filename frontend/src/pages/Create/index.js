@@ -1,10 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss";
-import LoginMan from "../../login_manager";
+import { language_fetch } from "../../network_manager";
 
 function Create() {
-
-  useEffect(()=>{
+  const [language, setlanguage] = useState(0);
+  useEffect(async()=>{
+    await language_fetch()
+.then((response) => response.json())
+.then((result) => {
+  let arr = []
+  for(let item of result){
+  arr.push((<option value={item.Id}>{item.Name}</option>))
+  }
+  setlanguage(arr)
+})
     let form = document.getElementById("create_form")
     let errmsg = document.getElementById("errormsg")
 
@@ -24,9 +33,9 @@ function Create() {
        <label for="name">Set name:</label><br />
           <input type="text" id="name" name="name" ></input><br />
           <label for="lang1">First language:</label><br />
-          <select id="lang1" name="lang1" ></select><br />
+          <select id="lang1" name="lang1">{language}</select><br />
           <label for="lang2">Second Language:</label><br />
-          <select id="lang2" name="lang2" ></select><br />
+          <select id="lang2" name="lang2" >{language}</select><br />
           <label for="set">Set:</label><br />
           <select id="set" name="set" ></select><br />
           <input type="button" id="create" name="create" value="Create"></input>
